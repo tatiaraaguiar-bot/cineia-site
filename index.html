@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CineIA - Descubra o Filme Perfeito.</title>
+
+<style>
+:root{--red:#e50914;--card:#1c1c1c}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+/* FUNDO */
+body{
+  background:#fff;
+  font-family:Arial,Helvetica,sans-serif;
+  text-align:center;
+  padding-bottom:40px;
+  color:#000;
+}
+body::before{
+  content:"";position:fixed;top:0;left:0;width:200%;height:100%;
+  background:
+    linear-gradient(90deg,rgba(229,9,20,.12)1px,transparent 1px)0 0/40px 40px,
+    linear-gradient(180deg,rgba(229,9,20,.12)1px,transparent 1px)0 0/40px 40px;
+  animation:m 6s linear infinite;z-index:-2;
+}
+@keyframes m{to{transform:translateY(40px)}}
+body::after{
+  content:"";position:fixed;inset:0;
+  background:radial-gradient(circle,rgba(229,9,20,.18),transparent 70%);
+  z-index:-3;
+}
+
+/* CABEÇALHO */
+.topo{margin-top:12px;font-size:14px;line-height:1.4}
+h1{
+  margin:14px 0;font-size:32px;letter-spacing:3px;
+  text-shadow:0 0 12px #e50914;
+}
+.slogan{margin-bottom:10px;color:#333}
+
+/* LOGO COM BORDA */
+.logo-box{
+  width:92%;max-width:850px;margin:10px auto;
+  padding:14px;
+  border:3px solid #000;
+  border-radius:14px;
+  box-shadow:0 0 10px rgba(0,0,0,0,35);
+  outline: 3px solid #e50914;
+}
+.logo-img{
+  width:150px;
+  display:block;
+  margin:auto;
+}
+
+/* CARD */
+.card{
+  width:92%;max-width:850px;margin:20px auto;
+  background:var(--card);color:#fff;
+  padding:18px;border-radius:12px;
+  border:2px solid var(--red);
+}
+
+/* FORM */
+label{display:block;text-align:left;font-size:16px;margin-top:10px;color:#ccc}
+select,button{
+  width:100%;padding:12px;margin-top:6px;border-radius:10px;font-size:16px;
+}
+select{background:#000;color:#fff;border:2px solid var(--red)}
+button{
+  background:var(--red);border:none;color:white;font-weight:bold;
+}
+
+/* RESULTADO */
+.resultado{
+  margin-top:16px;padding:12px;border-radius:10px;
+  background:#0d0d0d;display:none;text-align:left;
+}
+
+/* POSTER */
+.poster{
+  width:100%;height:160px;margin-top:12px;border-radius:10px;
+  background-size:cover;background-position:center;
+  display:flex;align-items:flex-end;padding:10px;
+}
+.poster.matrix{background-image:linear-gradient(180deg,transparent,rgba(0,0,0,.7)),repeating-linear-gradient(90deg,#003300 0 3px,#0000 3px 8px)}
+.poster.lucy{background-image:linear-gradient(180deg,rgba(60,0,0,.3),rgba(0,0,0,.7))}
+.poster.her{background-image:linear-gradient(180deg,rgba(200,20,20,.3),rgba(0,0,0,.7))}
+.poster.inception{background-image:linear-gradient(180deg,rgba(10,40,90,.3),rgba(0,0,0,.7))}
+.poster.chappie{background-image:linear-gradient(180deg,rgba(50,40,0,.3),rgba(0,0,0,.7))}
+
+/* BOTÃO */
+.watch-btn{
+  display:block;text-align:center;margin-top:10px;
+  background:#e50914;padding:12px;border-radius:10px;
+  color:#fff;font-weight:bold;text-decoration:none;
+}
+
+/* MODAL */
+.modal{
+  position:fixed;inset:0;background:rgba(0,0,0,.9);
+  display:none;justify-content:center;align-items:center;padding:14px;
+}
+.modal-content{width:100%;max-width:900px;background:#000;padding:10px;border-radius:10px}
+iframe{width:100%;height:55vh;border:0;border-radius:10px}
+.close{position:absolute;top:20px;right:20px;padding:8px 12px;font-weight:bold;border:none;border-radius:6px}
+
+/* COMENTÁRIOS */
+.coment-box{
+  width:92%;max-width:850px;margin:24px auto;
+  background:#f5f5f5;padding:14px;border-radius:12px;
+  border:2px solid var(--red);
+  text-align:left;
+}
+textarea{
+  width:100%;height:80px;border:2px solid var(--red);
+  border-radius:10px;padding:10px;font-size:14px;
+}
+.coment-list{
+  margin-top:12px;background:#fff;padding:10px;
+  border-radius:10px;max-height:200px;overflow-y:auto;
+}
+.coment{
+  background:#eee;padding:8px;margin-bottom:6px;
+  border-left:3px solid var(--red);
+  border-radius:6px;font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="topo"> <strong>
+  CETI PAULO FERRAZ — TERESINA/PI</strong> <br>
+ <strong>Turma: </strong>  2º Ano - Desenvolvimento de Sistemas<br>
+  <strong>Professora: </strong>  <b>Tatiara Leal</b><br>
+  Projeto: <b>CineIA — Dia “D” da Educação Profissional e Tecnológica</b>
+</div>
+
+<h1>CineIA</h1>
+<div class="slogan">Descubra seu Filme Perfeito.</div>
+
+<!-- LOGO -->
+<div class="logo-box">
+  <img src="logo.jpg" class="logo-img">
+</div>
+
+<!-- CARD FILMES -->
+<div class="card">
+  <label>Escolha um tema tecnológico:</label>
+  <select id="tema">
+    <option value="">Selecione...</option>
+    <option value="realidade-virtual">Realidade Virtual</option>
+    <option value="evolucao-humana">Evolução Humana</option>
+    <option value="ia">Inteligência Artificial</option>
+    <option value="tecnologia">Tecnologia</option>
+  </select>
+
+  <button onclick="recomendar()">Recomendar Filme</button>
+
+  <div id="res" class="resultado">
+    <div id="tituloFilme" style="font-size:18px;font-weight:bold"></div>
+    <div id="descFilme" style="color:#bbb;margin-top:4px"></div>
+    <div id="poster" class="poster"></div>
+    <a id="assistir" href="#" class="watch-btn">Assistir Aqui</a>
+  </div>
+</div>
+
+<!-- COMENTÁRIOS -->
+<div class="coment-box">
+  <h3>Comentários e Sugestões</h3>
+  <textarea id="comentText" placeholder="Digite seu comentário..."></textarea>
+  <button style="margin-top:10px" onclick="addComent()">Enviar Comentário</button>
+  <div id="comentList" class="coment-list"></div>
+</div>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+  <button class="close" onclick="fecharModal()">Fechar</button>
+  <div class="modal-content"><div id="frame"></div></div>
+</div>
+
+<script>
+const filmes={
+ "realidade-virtual":{
+   nome:"Matrix (1999)",
+   desc:"Um hacker descobre que vive em uma simulação criada por máquinas.",
+   yt:"https://www.youtube.com/embed/9ix7TUGVYIo",
+   css:"matrix"
+ },
+ "evolucao-humana":[
+   {nome:"Lucy (2014)",desc:"Uma mulher desenvolve habilidades extraordinárias.",yt:"https://www.youtube.com/embed/MVt32qoyhi0",css:"lucy"},
+   {nome:"Chappie (2015)",desc:"Um robô consciente enfrenta a evolução da vida.",yt:"https://www.youtube.com/embed/lyy7y0QOK-0",css:"chappie"}
+ ],
+ "ia":{
+   nome:"HER (2013)",
+   desc:"Um homem se apaixona por uma IA avançada.",
+   yt:"https://www.youtube.com/embed/6QRvTv_tpw0",
+   css:"her"
+ },
+ "tecnologia":{
+   nome:"A Origem (2010)",
+   desc:"Um especialista invade sonhos usando tecnologia.",
+   yt:"https://www.youtube.com/embed/YoHD9XEInc0",
+   css:"inception"
+ }
+};
+
+function recomendar(){
+  let t=document.getElementById("tema").value;if(!t){alert("Selecione um tema.");return;}
+  let f=t==="evolucao-humana"? filmes[t][Math.floor(Math.random()*2)] : filmes[t];
+  document.getElementById("tituloFilme").innerText=f.nome;
+  document.getElementById("descFilme").innerText=f.desc;
+  document.getElementById("poster").className="poster "+f.css;
+  document.getElementById("assistir").onclick=e=>{e.preventDefault();abrirModal(f.yt)};
+  document.getElementById("res").style.display="block";
+}
+
+function abrirModal(url){
+  document.getElementById("modal").style.display="flex";
+  document.getElementById("frame").innerHTML=`<iframe src="${url}" allowfullscreen></iframe>`;
+}
+function fecharModal(){
+  document.getElementById("modal").style.display="none";
+  document.getElementById("frame").innerHTML="";
+}
+
+/* COMENTÁRIOS */
+function addComent(){
+  let txt=document.getElementById("comentText").value.trim();
+  if(!txt){alert("Digite um comentário.");return;}
+  let box=document.createElement("div");
+  box.className="coment";
+  box.innerText=txt;
+  document.getElementById("comentList").appendChild(box);
+  document.getElementById("comentText").value="";
+}
+</script>
+</body>
+</html>
